@@ -15,6 +15,10 @@
     "typecheck": "npm run typecheck --workspace server && npm run typecheck --workspace client"
   },
   "devDependencies": {
+    "@types/jaro-winkler": "^0.2.4",
     "concurrently": "^9.1.0"
+  },
+  "dependencies": {
+    "jaro-winkler": "^0.2.8"
   }
 }

@@ -1,0 +1,40 @@
+[
+  { "id": "c001", "source": "crm",        "firstName": "Jean",             "lastName": "Dupont",         "email": "jean.dupont@gmail.com",       "phone": "0612345678",       "birthDate": "1985-03-12", "city": "Nantes" },
+  { "id": "c002", "source": "partenaire", "firstName": "JEAN",             "lastName": "DUPONT",         "email": "jean.dupont@gmail.com",       "phone": "+33 6 12 34 56 78","birthDate": "12/03/1985", "city": "NANTES" },
+
+  { "id": "c003", "source": "crm",        "firstName": "Jean",             "lastName": "Dupont",         "email": "j.dupont@free.fr",            "phone": "0698112233",       "birthDate": "1961-09-08", "city": "Rennes" },
+  { "id": "c004", "source": "partenaire", "firstName": "Jean",             "lastName": "Dupond",         "email": "j.dupont@free.fr",            "phone": "06 98 11 22 33",   "birthDate": "08/09/1961", "city": "Rennes" },
+
+  { "id": "c005", "source": "crm",        "firstName": "Marie",            "lastName": "Lefèvre",        "email": "m.lefevre@cabinet-durand.fr", "phone": "0698765432",       "birthDate": "1990-07-04", "city": "Angers" },
+  { "id": "c006", "source": "partenaire", "firstName": "Marie",            "lastName": "Lefevre-Durand", "email": "m.lefevre@cabinet-durand.fr", "phone": "0698765432",       "birthDate": "04/07/1990", "city": "Angers" },
+
+  { "id": "c007", "source": "crm",        "firstName": "Pierre-Alexandre", "lastName": "de la Fontaine", "email": "pa.delafontaine@orange.fr",   "phone": "+33611223344",     "birthDate": "1972-11-30", "city": "Tours" },
+  { "id": "c008", "source": "partenaire", "firstName": "P.A.",             "lastName": "De La Fontaine", "email": "pierre.delafontaine@orange.fr","phone": "0611223344",      "birthDate": "30/11/1972", "city": "Tours" },
+
+  { "id": "c009", "source": "crm",        "firstName": "Sophie",           "lastName": "Martin",         "email": "contact@cabinet-durand.fr",   "phone": "0145678901",       "birthDate": "1988-01-22", "city": "Angers" },
+  { "id": "c010", "source": "crm",        "firstName": "Thomas",           "lastName": "Bernard",        "email": "contact@cabinet-durand.fr",   "phone": "0145678901",       "birthDate": "1979-05-17", "city": "Angers" },
+  { "id": "c011", "source": "partenaire", "firstName": "Sophie",           "lastName": "Martin",         "email": "s.martin@cabinet-durand.fr",  "phone": "0145678901",       "birthDate": "22/01/1988", "city": "Angers" },
+
+  { "id": "c012", "source": "crm",        "firstName": "Luc",              "lastName": "Girard",         "email": "luc.girard@sfr.fr",           "phone": "0142556677",       "birthDate": "1975-08-03", "city": "Le Mans" },
+  { "id": "c013", "source": "crm",        "firstName": "Hélène",           "lastName": "Girard",         "email": "helene.girard@sfr.fr",        "phone": "0142556677",       "birthDate": "1977-02-11", "city": "Le Mans" },
+
+  { "id": "c014", "source": "crm",        "firstName": "Camille",          "lastName": "Petit",          "email": "camille.petit@gmail.com",     "phone": "0611998877",       "birthDate": "1991-04-19", "city": "Laval" },
+  { "id": "c015", "source": "partenaire", "firstName": "C.",               "lastName": "Petit",          "email": "camille.petit@gmail.com",     "phone": null,               "birthDate": null,         "city": null },
+  { "id": "c016", "source": "partenaire", "firstName": "Camille",          "lastName": "Petit",          "email": "cam.petit@outlook.fr",        "phone": "06 11 99 88 77",   "birthDate": "19/04/1991", "city": "Laval" },
+
+  { "id": "c017", "source": "crm",        "firstName": "Claire",           "lastName": "Rousseau",       "email": "claire.rousseau@yahoo.fr",    "phone": null,               "birthDate": "1995-02-14", "city": "Nantes" },
+  { "id": "c018", "source": "partenaire", "firstName": "Claire",           "lastName": "Rousseau",       "email": "c.rousseau@yahoo.fr",         "phone": "0766554433",       "birthDate": "14/02/1995", "city": "Nantes" },
+
+  { "id": "c019", "source": "crm",        "firstName": "Élodie",           "lastName": "Brun",           "email": "elodie.brun@gmail.com",       "phone": "0755443322",       "birthDate": null,         "city": "Angers" },
+  { "id": "c020", "source": "partenaire", "firstName": "Elodie",           "lastName": "Brun",           "email": "elodie.brun@gmail.com",       "phone": "07 55 44 33 22",   "birthDate": "03/11/1992", "city": "Angers" },
+
+  { "id": "c021", "source": "crm",        "firstName": "Ana",              "lastName": "Gómez",          "email": "ana.gomez@example.es",        "phone": "+34612345678",     "birthDate": "1983-06-25", "city": "Madrid" },
+  { "id": "c022", "source": "partenaire", "firstName": "Ana",              "lastName": "Gomez",          "email": "ana.gomez@example.es",        "phone": "0034 612 345 678", "birthDate": "25/06/1983", "city": "Madrid" },
+
+  { "id": "c023", "source": "crm",        "firstName": "François",         "lastName": "Muller",         "email": "f.muller@wanadoo.fr",         "phone": "0388123456",       "birthDate": "1968-12-01", "city": "Strasbourg" },
+  { "id": "c024", "source": "partenaire", "firstName": "Muller",           "lastName": "François",       "email": "f.muller@wanadoo.fr",         "phone": "+33 3 88 12 34 56","birthDate": "01/12/1968", "city": "Strasbourg" },
+
+  { "id": "c025", "source": "crm",        "firstName": null,               "lastName": "Cabinet Durand", "email": "contact@cabinet-durand.fr",   "phone": "0145678901",       "birthDate": null,         "city": "Angers" },
+
+  { "id": "c026", "source": "partenaire", "firstName": "Nicolas",          "lastName": "Leroy",          "email": "n.leroy@gmail.com",           "phone": "0623456789",       "birthDate": "1993-10-05", "city": "Nantes" }
+]
