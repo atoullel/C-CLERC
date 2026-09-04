@@ -1,9 +1,18 @@
 // server/src/matching/similarity.ts
 
 import jaroWinkler from 'jaro-winkler';
-import type { FieldComparison } from '../../../shared/types';
-import {MATCH_THRESHOLD, PARTIAL_THRESHOLD} from 'weight.ts';
+import type { FieldComparison, NameAlignment } from '../../../shared/types';
+import {
+  MATCH_THRESHOLD,
+  PARTIAL_THRESHOLD,
+  INITIAL_PREFIX_SIMILARITY,
+  INITIAL_MULTI_LETTER_SIMILARITY,
+  MIN_SWAP_CORROBORATION_COUNT,
+} from './weight';
 
+// ---------------------------------------------------------------------
+// Verdict thresholds
+// ---------------------------------------------------------------------
 
 export function verdictFor(
   similarity: number
@@ -17,7 +26,6 @@ export function verdictFor(
 // Exact-match fields (phone, birthDate, city)
 // ---------------------------------------------------------------------
 
-
 export function exactSimilarity(a: string, b: string): number {
   return a === b ? 1 : 0;
 }
@@ -26,25 +34,45 @@ export function exactSimilarity(a: string, b: string): number {
 // Email
 // ---------------------------------------------------------------------
 
+function splitEmail(email: string): { local: string; domain: string } | null {
+  const at = email.lastIndexOf('@');
+  if (at <= 0 || at === email.length - 1) return null;
+  return { local: email.slice(0, at), domain: email.slice(at + 1) };
+}
+
+
 export function emailSimilarity(a: string, b: string): number {
   if (a === b) return 1;
-  const [localA, domainA] = a.split('@');
-  const [localB, domainB] = b.split('@');
-  if (!domainA || !domainB || domainA !== domainB) return 0;
-  return jaroWinkler(localA, localB);
+  const partsA = splitEmail(a);
+  const partsB = splitEmail(b);
+  if (!partsA || !partsB || partsA.domain !== partsB.domain) return 0;
+  return jaroWinkler(partsA.local, partsB.local);
 }
 
 // ---------------------------------------------------------------------
 // Names (swap-tolerant, initial-aware)
 // ---------------------------------------------------------------------
 
+// First letter of each space/hyphen-separated token, "jean-pierre" -> "jp".
+function extractInitials(value: string): string {
+  return value
+    .split(/[\s-]+/)
+    .filter((token) => token.length > 0)
+    .map((token) => token[0])
+    .join('');
+}
+
+
 function nameTokenSimilarity(a: string, b: string): number {
   if (a === b) return 1;
-  const isInitial = a.length === 1 || b.length === 1;
-  if (isInitial) {
-    const [shorter, longer] = a.length <= b.length ? [a, b] : [b, a];
-    return longer.startsWith(shorter) ? 0.75 : 0;
+  const [shorter, longer] = a.length <= b.length ? [a, b] : [b, a];
+
+  if (shorter.length <= 2) {
+    if (longer.startsWith(shorter)) return INITIAL_PREFIX_SIMILARITY;
+    if (shorter.length >= 2 && extractInitials(longer) === shorter) return INITIAL_MULTI_LETTER_SIMILARITY;
+    return 0;
   }
+
   return jaroWinkler(a, b);
 }
 
@@ -60,17 +88,9 @@ function averageDefined(values: Array<number | null>): number {
   return defined.reduce((sum, v) => sum + v, 0) / defined.length;
 }
 
-type NameFieldRow = {
-  similarity: number;
-  matchedField: 'firstName' | 'lastName' | null;
-};
-
-export type NameAlignment = {
-
-  firstName: NameFieldRow;
-  lastName: NameFieldRow;
-  swapped: boolean;
-};
+function countDefined(values: Array<number | null>): number {
+  return values.filter((v) => v !== null).length;
+}
 
 
 export function alignNames(
@@ -86,9 +106,12 @@ export function alignNames(
 
   const directAvg = averageDefined([directFirst, directLast]);
   const swappedAvg = averageDefined([swappedFirst, swappedLast]);
+  const directCount = countDefined([directFirst, directLast]);
+  const swappedCount = countDefined([swappedFirst, swappedLast]);
 
 
-  const useSwapped = swappedAvg > directAvg;
+  const swapHasEnoughEvidence = swappedCount >= MIN_SWAP_CORROBORATION_COUNT || swappedCount > directCount;
+  const useSwapped = swapHasEnoughEvidence && swappedAvg > directAvg;
 
   if (useSwapped) {
     return {

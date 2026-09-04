@@ -23,6 +23,19 @@ export type FieldComparison = {
   valueB: string | null;
   similarity: number;        // 0 (no relation) to 1 (identical after normalization)
   verdict: 'match' | 'partial' | 'mismatch' | 'missing';
+  matchedFromField?: 'firstName' | 'lastName';
+};
+
+export type NameFieldRow = {
+  similarity: number;
+  matchedField: 'firstName' | 'lastName' | null;
+};
+
+
+export type NameAlignment = {
+  firstName: NameFieldRow;
+  lastName: NameFieldRow;
+  swapped: boolean;
 };
 
 
@@ -31,7 +44,7 @@ export type PairMatchResult = {
   contactIdB: string;
   score: number;              // overall confidence, 0-1
   breakdown: FieldComparison[];
-  /** true if a hard-override rule fired (e.g. large birth-date gap) capping the score */
+  // true if a hard-override rule fired (large birth-date gap) capping the score
   overridden: boolean;
 };
 
@@ -39,8 +52,8 @@ export type DuplicateGroupStatus = 'pending' | 'confirmed' | 'rejected';
 
 
 export type DuplicateGroup = {
-  /** Stable signature = sorted contact IDs joined, e.g. "c014|c015|c016".
-   *  Used as the key for persisting confirm/reject decisions across reloads. */
+  /** Stable signature = sorted contact IDs joined, e.g. "c014|c015|c016"
+   *  Used as the key for persisting confirm/reject decisions across reloads */
   id: string;
   contactIds: string[];
   score: number;               // aggregate confidence for the whole group
@@ -48,8 +61,8 @@ export type DuplicateGroup = {
   status: DuplicateGroupStatus;
 };
 
-/** Body sent when the reviewer confirms a merge. */
+// Body sent when the reviewer confirms a merge.
 export type ConfirmMergePayload = {
-  /** Which contactId's values win for each field, or a manual override string. */
+  // Which contactId's values win for each field, or a manual override string.
   fieldResolutions: Record<ComparableField, { sourceContactId: string } | { manualValue: string | null }>;
 };
