@@ -1,5 +1,3 @@
-// server/src/matching/normalize.ts
-
 import { parse, isValid, format } from 'date-fns';
 import {
   parsePhoneNumberFromString,

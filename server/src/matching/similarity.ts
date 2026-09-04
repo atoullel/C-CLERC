@@ -1,5 +1,3 @@
-// server/src/matching/similarity.ts
-
 import jaroWinkler from 'jaro-winkler';
 import type { FieldComparison, NameAlignment } from '../../../shared/types';
 import {

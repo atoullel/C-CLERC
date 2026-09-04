@@ -21,7 +21,7 @@ export const OVERRIDE_SCORE_CAP = 0.3;
 
 
 // Any group with a score above this deserve a human's attention
-const REVIEW_THRESHOLD = 0.4;
+export const REVIEW_THRESHOLD = 0.4;
 
 // A pair scoring below this or overriden is treated two records that are not the same person
-const CONTRADICTION_THRESHOLD = 0.15;
+export const CONTRADICTION_THRESHOLD = 0.15;

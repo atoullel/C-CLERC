@@ -47,16 +47,3 @@ export function compareFields(a: Contact, b: Contact): FieldComparison[] {
  
   return breakdown;
 }
-
-
-function compoundScore(breakdown: FieldComparison[], a: Contact, b: Contact) {
-  let weightedSum = 0, weightTotal = 0;
-  for (const row of breakdown) {
-    if (row.verdict === 'missing') continue;   // null fields are neutral, not penalized
-    weightedSum += FIELD_WEIGHTS[row.field] * row.similarity;
-    weightTotal += FIELD_WEIGHTS[row.field];
-  }
-  let score = weightTotal > 0 ? weightedSum / weightTotal : 0;
-
-  return score;
-}

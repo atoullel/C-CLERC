@@ -1,5 +1,4 @@
-// shared/matching/cluster.ts
-import { Contact, PairMatchResult, DuplicateGroup } from '../types';
+import type  { Contact, PairMatchResult, DuplicateGroup } from '../../../shared/types';
 import { REVIEW_THRESHOLD, CONTRADICTION_THRESHOLD } from './weight';
 
 class UnionFind {
